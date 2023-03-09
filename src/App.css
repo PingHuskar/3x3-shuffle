@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.board {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 81vh;
+  width: 81vh;
+  outline: 5px solid salmon;
+  font-size: 5em;
+  font-family: "IBM Plex Sans", serif;
+}
+.board .r1, .board .r2, .board .r3, .board .r4 {
+  display: flex;
+  flex-flow: row;
+  outline: 3px solid salmon;
+  height: 100%;
+  width: 100%;
+}
+.board .r1 .c1, .board .r1 .c2, .board .r1 .c3, .board .r1 .c4, .board .r2 .c1, .board .r2 .c2, .board .r2 .c3, .board .r2 .c4, .board .r3 .c1, .board .r3 .c2, .board .r3 .c3, .board .r3 .c4, .board .r4 .c1, .board .r4 .c2, .board .r4 .c3, .board .r4 .c4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: 3px solid salmon;
+  height: 100%;
+  width: 100%;
+}
+.board .r1 .c1:hover, .board .r1 .c2:hover, .board .r1 .c3:hover, .board .r1 .c4:hover, .board .r2 .c1:hover, .board .r2 .c2:hover, .board .r2 .c3:hover, .board .r2 .c4:hover, .board .r3 .c1:hover, .board .r3 .c2:hover, .board .r3 .c3:hover, .board .r3 .c4:hover, .board .r4 .c1:hover, .board .r4 .c2:hover, .board .r4 .c3:hover, .board .r4 .c4:hover {
+  background: rgba(250, 128, 114, 0.6);
+}
+
+.btnrow {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin-top: 3vh;
+  width: 100%;
+}
+.btnrow button {
+  background: #222;
+}
+.btnrow button[type=submit] {
+  outline: 3px solid rgb(144, 238, 144);
+  background: rgba(144, 238, 144, 0.2);
+}
+.btnrow button[type=reset] {
+  outline: 3px solid rgb(255, 0, 0);
+  background: rgba(255, 0, 0, 0.2);
+}/*# sourceMappingURL=App.css.map */
