@@ -3,6 +3,7 @@ import './App.css'
 import Board from './Board'
 import gsap from 'gsap'
 import { Elastic } from 'gsap'
+import IsSorted from './IsSorted'
 
 function App() {
   function GenBoard() {
@@ -10,7 +11,6 @@ function App() {
     const ARRAY1TO8 = [ ...Array(8).keys() ].map( i => i+1)
     const SHUFFLEARRAY1TO8 = ARRAY1TO8.sort((a, b) => 0.5 - Math.random())
     const GETFIRST8SHUFFLEARRAY1TO8 = SHUFFLEARRAY1TO8.slice(0)
-    // console.log(GETFIRST16SHUFFLEARRAY1TO8)
     let outOfOrderPairCount = 0
     for (let item of GETFIRST8SHUFFLEARRAY1TO8) {
       let temparr = GETFIRST8SHUFFLEARRAY1TO8
@@ -21,7 +21,11 @@ function App() {
       }
     }
     // console.log(outOfOrderPairCount)
-    if (outOfOrderPairCount % 2 === 0) {
+    
+    if (
+        outOfOrderPairCount % 2 === 0 
+    && !IsSorted(GETFIRST8SHUFFLEARRAY1TO8)
+    ) {
       console.log(GETFIRST8SHUFFLEARRAY1TO8)
       setRandomBoard(GETFIRST8SHUFFLEARRAY1TO8)
     } else {
