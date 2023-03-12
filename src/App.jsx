@@ -27,6 +27,7 @@ function App() {
     && !IsSorted(GETFIRST8SHUFFLEARRAY1TO8)
     ) {
       console.log(GETFIRST8SHUFFLEARRAY1TO8)
+      localStorage.setItem('board', JSON.stringify(GETFIRST8SHUFFLEARRAY1TO8))
       setRandomBoard(GETFIRST8SHUFFLEARRAY1TO8)
     } else {
       GenBoard()
@@ -50,11 +51,12 @@ function App() {
       scale: 0,
       stagger: 0.055
     })
-    // setRandomBoard([])
+    localStorage.removeItem('board')
+    setRandomBoard([])
   }
   /*
   /*/
-  const [randomBoard, setRandomBoard] = useState([])
+  const [randomBoard, setRandomBoard] = useState(JSON.parse(localStorage.getItem('board')) || [])
   //*/
   return (
     <div className="App">

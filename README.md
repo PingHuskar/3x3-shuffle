@@ -1,4 +1,7 @@
 # Tiles In Order
+- [8-puzzle-solver · GitHub Topics](https://github.com/topics/8-puzzle-solver)
+- [8 puzzle Problem using Branch And Bound](https://www.geeksforgeeks.org/8-puzzle-problem-using-branch-and-bound/)
+- [How to check if an instance of 15 puzzle is solvable?](https://www.geeksforgeeks.org/check-instance-15-puzzle-solvable/)
 
 ## Explained by ChatGPT
 ### What is "out of order pair"
