@@ -29,6 +29,16 @@ function AnimateIn() {
 }
 
 function App() {
+
+  function checkComplete() {
+    // console.log((localStorage.getItem(`board`) === `[1,2,3,4,5,6,7,8,0]`))
+    // console.log(gameEnd)
+    if (localStorage.getItem(`board`) === `[1,2,3,4,5,6,7,8,0]` || JSON.parse(gameEnd)) {
+      localStorage.setItem(`board`,`[C,O,N,G,R,A,T,S,!]`.replace(/([\w!])/g,`"$1"`))
+      localStorage.setItem(`gameEnd`,`true`)
+    }
+    setGameEnd(JSON.parse(localStorage.getItem(`gameEnd`)))
+  }
   function GenBoard() {
     console.clear()
     const ARRAY1TO8 = [ ...Array(8).keys() ].map( i => i+1)
@@ -51,7 +61,7 @@ function App() {
     ) {
       GETFIRST8SHUFFLEARRAY1TO8.push(0)
       console.log(GETFIRST8SHUFFLEARRAY1TO8)
-      localStorage.setItem('board', JSON.stringify(GETFIRST8SHUFFLEARRAY1TO8))
+      localStorage.setItem(`board`, JSON.stringify(GETFIRST8SHUFFLEARRAY1TO8))
       setRandomBoard(JSON.parse(localStorage.getItem('board')))
       setA(GETFIRST8SHUFFLEARRAY1TO8.at(0))
       setB(GETFIRST8SHUFFLEARRAY1TO8.at(1))
@@ -62,6 +72,8 @@ function App() {
       setG(GETFIRST8SHUFFLEARRAY1TO8.at(6))
       setH(GETFIRST8SHUFFLEARRAY1TO8.at(7))
       setI(GETFIRST8SHUFFLEARRAY1TO8.at(8))
+      localStorage.setItem(`gameEnd`,`false`)
+      setGameEnd(localStorage.getItem(`gameEnd`))
       AnimateIn()
     } else {
       GenBoard()
@@ -96,6 +108,8 @@ function App() {
     })
     localStorage.setItem(`board`,`[0,0,0,0,0,0,0,0,0]`)
     setRandomBoard(localStorage.getItem(`board`))
+    localStorage.setItem(`gameEnd`,`false`)
+    setGameEnd(localStorage.getItem(`gameEnd`))
     toast(`Reset`)
   }
   
@@ -116,6 +130,7 @@ function App() {
   const [g, setG] = useState(``)
   const [h, setH] = useState(``)
   const [i, setI] = useState(``)
+  const [gameEnd,setGameEnd] = useState(JSON.parse(localStorage.getItem(`gameEnd`) || `false`))
   //*/
   useEffect(() => {
     setRandomBoard(() => JSON.parse(localStorage.getItem('board') || '[]'))
@@ -137,7 +152,7 @@ function App() {
     <div className="App">
       <div className="board">
         <div className="r1">
-          <div className={`c1 ${a===1 && `CorrectPlace`}`} onClick={() => {
+          <div className={`c1 ${(a===1 || JSON.parse(gameEnd)) && `CorrectPlace`}`} onClick={() => {
             if ([1,3,-1,-3,].includes(
               randomBoard.indexOf(a)-randomBoard.indexOf(0))
               ) {
@@ -146,6 +161,7 @@ function App() {
                   swap0(JSON.stringify(randomBoard),a)
                 )
                 setA(0)
+                checkComplete()
                 setRandomBoard(localStorage.getItem(`board`))
               } else {
                 toast(UnableToMove(a))
@@ -155,7 +171,7 @@ function App() {
               {a !== 0 ? a : ``}
             </span>
           </div>
-          <div className={`c2 ${b===2 && `CorrectPlace`}`} onClick={() => {
+          <div className={`c2 ${(b===2 || JSON.parse(gameEnd)) && `CorrectPlace`}`} onClick={() => {
             if ([1,3,-1,-3,].includes(
               randomBoard.indexOf(b)-randomBoard.indexOf(0))
               ) {
@@ -164,6 +180,7 @@ function App() {
                   swap0(JSON.stringify(randomBoard),b)
                 )
                 setB(0)
+                checkComplete()
                 setRandomBoard(localStorage.getItem(`board`))
               } else {
                 toast(UnableToMove(b))
@@ -171,7 +188,7 @@ function App() {
           }}>
             <span className={`cell`}>{b !== 0 ? b : ``}</span>
           </div>
-          <div className={`c3 ${c===3 && `CorrectPlace`}`} onClick={() => {
+          <div className={`c3 ${(c===3 || JSON.parse(gameEnd)) && `CorrectPlace`}`} onClick={() => {
             if ([1,3,-3,].includes(
               randomBoard.indexOf(c)-randomBoard.indexOf(0))
               ) {
@@ -180,6 +197,7 @@ function App() {
                   swap0(JSON.stringify(randomBoard),c)
                 )
                 setC(0)
+                checkComplete()
                 setRandomBoard(localStorage.getItem(`board`))
               } else {
                 toast(UnableToMove(c))
@@ -189,7 +207,7 @@ function App() {
           </div>
         </div>
         <div className="r2">
-          <div className={`c1 ${d===4 && `CorrectPlace`}`} onClick={() => {
+          <div className={`c1 ${(d===4 || JSON.parse(gameEnd)) && `CorrectPlace`}`} onClick={() => {
             if ([3,-1,-3,].includes(
               randomBoard.indexOf(d)-randomBoard.indexOf(0))
               ) {
@@ -198,14 +216,16 @@ function App() {
                 swap0(JSON.stringify(randomBoard),d)
                 )
                 setD(0)
+                checkComplete()
                 setRandomBoard(localStorage.getItem(`board`))
               } else {
+                checkComplete()
                 toast(UnableToMove(d))
               }
           }}>
             <span className={`cell`}>{d !== 0 ? d : ``}</span>
           </div>
-          <div className={`c2 ${e===5 && `CorrectPlace`}`} onClick={() => {
+          <div className={`c2 ${(e===5 || JSON.parse(gameEnd)) && `CorrectPlace`}`} onClick={() => {
             if ([1,3,-1,-3,].includes(
               randomBoard.indexOf(e)-randomBoard.indexOf(0))
               ) {
@@ -214,6 +234,7 @@ function App() {
                   swap0(JSON.stringify(randomBoard),e)
                 )
                 setE(0)
+                checkComplete()
                 setRandomBoard(localStorage.getItem(`board`))
               } else {
                 toast(UnableToMove(e))
@@ -221,7 +242,7 @@ function App() {
           }}>
             <span className={`cell`}>{e !== 0 ? e : ``}</span>
           </div>
-          <div className={`c3 ${f===6 && `CorrectPlace`}`} onClick={(e) => {
+          <div className={`c3 ${(f===6 || JSON.parse(gameEnd)) && `CorrectPlace`}`} onClick={(e) => {
             if ([3,1,-3,].includes(
               randomBoard.indexOf(f)-randomBoard.indexOf(0))
               ) {
@@ -230,6 +251,7 @@ function App() {
                   swap0(JSON.stringify(randomBoard),f)
                 )
                 setF(0)
+                checkComplete()
                 setRandomBoard(localStorage.getItem(`board`))
               } else {
                 toast(UnableToMove(f))
@@ -239,7 +261,7 @@ function App() {
           </div>
         </div>
         <div className="r3">
-          <div className={`c1 ${g===7 && `CorrectPlace`}`} onClick={(e) => {
+          <div className={`c1 ${(g===7 || JSON.parse(gameEnd)) && `CorrectPlace`}`} onClick={(e) => {
             if ([-1,3,-3,].includes(
               randomBoard.indexOf(g)-randomBoard.indexOf(0))
               ) {
@@ -248,6 +270,7 @@ function App() {
                   swap0(JSON.stringify(randomBoard),g)
                 )
                 setG(0)
+                checkComplete()
                 setRandomBoard(localStorage.getItem(`board`))
               } else {
                 toast(UnableToMove(g))
@@ -255,7 +278,7 @@ function App() {
           }}>
             <span className={`cell`}>{g !== 0 ? g : ``}</span>
           </div>
-          <div className={`c2 ${h===8 && `CorrectPlace`}`} onClick={() => {
+          <div className={`c2 ${(h===8 || JSON.parse(gameEnd)) && `CorrectPlace`}`} onClick={() => {
             if ([1,3,-1,-3,].includes(
               randomBoard.indexOf(h)-randomBoard.indexOf(0)
               )) {
@@ -264,6 +287,7 @@ function App() {
                   swap0(JSON.stringify(randomBoard),h)
                 )
                 setH(0)
+                checkComplete()
                 setRandomBoard(localStorage.getItem(`board`))
               } else {
                 toast(UnableToMove(h))
@@ -271,7 +295,7 @@ function App() {
           }}>
             <span className={`cell`}>{h !== 0 ? h : ``}</span>
           </div>
-          <div className={`c3 ${i===0 && `CorrectPlace`}`} onClick={(e) => {
+          <div className={`c3 ${(i===0 || JSON.parse(gameEnd)) && `CorrectPlace`}`} onClick={(e) => {
             if ([1,3,-1,-3,].includes(
               randomBoard.indexOf(i)-randomBoard.indexOf(0))
               ) {
@@ -280,9 +304,8 @@ function App() {
                   swap0(JSON.stringify(randomBoard),i)
                 )
                 setI(0)
-                setRandomBoard(() => 
-                  localStorage.getItem(`board`)
-                )
+                checkComplete()
+                setRandomBoard(localStorage.getItem(`board`))
               } else {
                 toast(UnableToMove(i))
               }
