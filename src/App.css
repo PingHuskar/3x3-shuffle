@@ -45,6 +45,10 @@ body {
   width: 100%;
 }
 .board .r1 .c1:hover, .board .r1 .c2:hover, .board .r1 .c3:hover, .board .r1 .c4:hover, .board .r2 .c1:hover, .board .r2 .c2:hover, .board .r2 .c3:hover, .board .r2 .c4:hover, .board .r3 .c1:hover, .board .r3 .c2:hover, .board .r3 .c3:hover, .board .r3 .c4:hover, .board .r4 .c1:hover, .board .r4 .c2:hover, .board .r4 .c3:hover, .board .r4 .c4:hover {
+  background: rgba(250, 128, 114, 0.3);
+}
+
+.CorrectPlace {
   background: rgba(250, 128, 114, 0.6);
 }
 

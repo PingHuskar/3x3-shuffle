@@ -4,7 +4,7 @@ import gsap from 'gsap'
 import { Elastic } from 'gsap'
 
 export default function Board(props) {
-    let [a,b,c,d,e,f,g,h] = props.setBoard
+    let [a,b,c,d,e,f,g,h,i] = props.setBoard
     useEffect(() => {
       // gsap.fromTo(`.board`, {
       //   x: 0,
@@ -35,7 +35,12 @@ export default function Board(props) {
     return (
       <div className="board">
         <div className="r1">
-          <div className="c1">
+          <div className="c1" onClick={() => {
+            alert(
+              JSON.parse(localStorage.getItem('board')).indexOf(a)
+              -JSON.parse(localStorage.getItem('board')).indexOf(0)
+              )
+          }}>
             <span className="cell">{a}</span>
           </div>
           <div className="c2">
@@ -60,11 +65,23 @@ export default function Board(props) {
           <div className="c1">
             <span className="cell">{g}</span>
           </div>
-          <div className="c2">
+          <div className="c2" onClick={() => {
+            let temp = JSON.parse(localStorage.getItem('board'))
+            if ([1,3].includes(
+              Math.abs(temp.indexOf(h)-temp.indexOf(0))
+              )) {
+                localStorage.setItem(`board`,
+                  localStorage.getItem('board')
+                  .replace(h,`x`)
+                  .replace(0,h)
+                  .replace(`x`,0)
+                )
+              }
+          }}>
             <span className="cell">{h}</span>
           </div>
           <div className="c3">
-            <span className="cell"></span>
+            <span className="cell">{i !== 0 ? i : ``}</span>
           </div>
         </div>
       </div>

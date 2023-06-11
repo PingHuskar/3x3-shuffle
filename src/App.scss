@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 
+$primary-color: salmon;
+$primary-color-mid: rgba($primary-color, 0.6);
+$primary-color-low: rgba($primary-color, 0.3);
+
 * {
   margin: 0;
   padding: 0;
@@ -24,27 +28,31 @@ body {
   text-align: center;
   height: 81vh;
   width: 81vh;
-  outline: 5px solid salmon;
+  outline: 5px solid $primary-color;
   font-size: 5em;
   font-family: 'IBM Plex Sans', serif;
   .r1,.r2,.r3,.r4 {
     display: flex;
     flex-flow: row;
-    outline: 3px solid salmon;
+    outline: 3px solid $primary-color;
     height: 100%;
     width: 100%;
     .c1,.c2,.c3,.c4 {
       display: flex;
       align-items: center;
       justify-content: center;
-      outline: 3px solid salmon;
+      outline: 3px solid $primary-color;
       height: 100%;
       width: 100%;
       &:hover {
-        background: rgba(250, 128, 114, 0.6);
+        background: $primary-color-low;
       }
     }
   }
+}
+
+.CorrectPlace {
+  background: $primary-color-mid;
 }
 
 .btnrow {
